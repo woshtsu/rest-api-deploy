@@ -82,9 +82,9 @@ app.get('/movies/:id',(req,res)=>{
 
 
 
-app.use((req, res) => {
+/*app.use((req, res) => {
   return res.status(404).send("404")
-});
+});*/
 
 
 module.exports = app;
