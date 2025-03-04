@@ -83,15 +83,7 @@ app.get('/movies/:id',(req,res)=>{
 
 
 app.use((req, res) => {
-  res.status(404);
-  try {
-      const img = fs.readFileSync('./public/aviso404.svg');
-      res.setHeader('Content-Type', 'image/svg+xml');
-      return res.send(img);
-  } catch (error) {
-      console.error('Error al leer el archivo SVG:', error.message);
-      res.status(500).send('Error interno del servidor');
-  }
+  return res.status(404).send("404")
 });
 
 
