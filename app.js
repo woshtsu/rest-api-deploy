@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.send('¡Hola, mundo!');
 });
 
-app.get('/movies',(req,res)=>{
+/*app.get('/movies',(req,res)=>{
   const { genre, search } = req.query
   if (genre) {
     const filterMovies = movies.filter(
@@ -78,7 +78,7 @@ app.get('/movies/:id',(req,res)=>{
   const { id } = req.params
   const movie = movies.find(movie => movie.id == id)
   if (movie) return res.json(movie)
-})
+})*/
 
 
 
