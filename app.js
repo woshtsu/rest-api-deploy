@@ -12,9 +12,9 @@ app.use(express.json())
 app.use(cors())
 app.disable('x_powered-by')
 
-app.get('/', (req, res)=>{
-  res.send('<h1>Vamos bien</h1>')
-})
+app.get('/', (req, res) => {
+  res.send('¡Hola, mundo!');
+});
 
 app.get('/movies',(req,res)=>{
   const { genre, search } = req.query
@@ -82,23 +82,17 @@ app.get('/movies/:id',(req,res)=>{
 
 
 
-app.use((req,res)=>{
+app.use((req, res) => {
+  res.status(404);
   try {
-    res.status(404)
-    const img = fs.readFileSync('./aviso404.svg')
-    res.setHeader('Content-Type', 'image/svg+xml')
-    return res.send(img)
+      const img = fs.readFileSync('./public/aviso404.svg');
+      res.setHeader('Content-Type', 'image/svg+xml');
+      return res.send(img);
   } catch (error) {
-    console.error(error);
-    res.status(500)
-    return res.send("Error fatal 500")
+      console.error('Error al leer el archivo SVG:', error.message);
+      res.status(500).send('Error interno del servidor');
   }
-})
+});
 
 
 module.exports = app;
-
-/*const PORT = process.env.PORT ?? 1234
-app.listen(PORT,()=>{
-  console.log(`server listening on port http://localhost:${PORT}`)
-})*/
