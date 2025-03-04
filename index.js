@@ -3,6 +3,7 @@ const movies = require('./movies.json')
 const fs = require('node:fs')
 const z = require('zod')
 const cors = require('cors')
+const path = require('node:path')
 const { title } = require('node:process')
 const { validateMovie, validatePartialMovie } = require('./schemas/movies')
 const { error } = require('node:console')
@@ -82,8 +83,16 @@ app.get('/movies/:id',(req,res)=>{
 
 
 
+
 app.use((req, res) => {
-  return res.status(404).send("404")
+    res.status(404);
+    const filePath = path.join(__dirname, 'public', 'aviso404.svg'); // Ruta absoluta al archivo
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error('Error al enviar el archivo SVG:', err.message);
+            res.status(500).send('Error interno del servidor');
+        }
+    });
 });
 
 
